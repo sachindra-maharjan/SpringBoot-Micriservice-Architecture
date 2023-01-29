@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: SERVICE
+    name: SERVICE-REGISTRY
 
 euraka:
   client:
