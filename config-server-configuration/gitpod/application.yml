@@ -1,0 +1,13 @@
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: https://8761-sachindrama-springbootm-8sbx3ir343i.ws-us84.gitpod.io/eureka
+  instance:
+    hostname: 8761-sachindrama-springbootm-8sbx3ir343i.ws-us84.gitpod.io
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0

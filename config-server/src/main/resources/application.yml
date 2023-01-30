@@ -11,3 +11,8 @@ spring:
         git: 
           uri: https://github.com/sachindra-maharjan/config-server
           clone-on-start: true
+          repos:
+            gitpod:
+              pattern: gitpod*
+              uri: file://workspace/SpringBoot-Micriservice-Architecture/config-service-configuration/gitpod
+        

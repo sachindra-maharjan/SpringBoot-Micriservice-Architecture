@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  service-registry:
+    build: ./service-registry
+    ports:
+      - 8761:8761
+  
+  config-server:
+    build: ./config-server
+    ports:
+      - 9192:9192
+  
+  # api-gateway:
+  #   build: ./api-gateway
+  #   ports:
+  #     - 9191:9191
+  #   depends_on:
+  #     - user-service
+  #     - comment-service
+  
+  # user-service:
+  #   build: ./user-service
+  #   ports:
+  #     - 9010:9010
+  #   depends_on:
+  #     - config-server
+
+  # comment-service:
+  #   build: ./comment-service
+  #   ports:
+  #     - 9020:9020
+  #   depends_on:
+  #     - config-server
