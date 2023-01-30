@@ -8,3 +8,4 @@ spring:
     import: "optional:configserver:http://localhost:9192"
 
 
+

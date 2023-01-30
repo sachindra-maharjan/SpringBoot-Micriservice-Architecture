@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sachindramaharjan.microservice.arch.userservice.entity.User;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/users")
+@Slf4j
 public class UserController {
   
   @GetMapping("/")
@@ -24,6 +27,7 @@ public class UserController {
       new User("1","Ned Stark", "ned.start@gmail.com"),
       new User("2", "Tom Cruise", "tom.cruise@gmail.com")
     };
+    log.info("Getting all users");
     return Stream.of(users).collect(Collectors.toList());
   }
 
