@@ -12,12 +12,7 @@ services:
       - 8761:8761
     networks:
       - spring-cloud-network
-    healthcheck:
-      test: ["curl", "-f", "localhost:8761"]
-      interval: 5s
-      timeout: 5s
-      retries: 20
-
+    
   config-server:
     container_name: config-server
     build: 
@@ -31,11 +26,6 @@ services:
       - eureka-server
     networks:
       - spring-cloud-network
-    healthcheck:
-      test: ["curl", "-f", "localhost:9192"]
-      interval: 5s
-      timeout: 5s
-      retries: 20
     
   api-gateway:
     build: ./api-gateway

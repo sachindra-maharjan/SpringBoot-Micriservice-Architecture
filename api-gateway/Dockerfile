@@ -1,8 +1,8 @@
 FROM openjdk:19-jdk-alpine
 
+RUN apk --update --no-cache add curl
+
 WORKDIR /app
-COPY ./wait-for-it.sh ./
-RUN chmod +x wait-for-it.sh
 
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
@@ -10,6 +10,9 @@ RUN ./mvnw dependency:go-offline
  
 COPY src ./src
 
-CMD ["./wait-for-it.sh", "config-server:9192", "--", "./mvnw", "spring-boot:run"]
+COPY wait-for-it.sh ./
+RUN chmod +x ./wait-for-it.sh
 
-#CMD ["./mvnw", "spring-boot:run"]
+ENTRYPOINT [ "./wait-for-it.sh",  "config-server:9192/actuator/health"]
+
+CMD ["./mvnw", "spring-boot:run"]
