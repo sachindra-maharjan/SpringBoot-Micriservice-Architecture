@@ -2,45 +2,48 @@ version: "3.9"
 
 services:
   eureka-server:
-    build: ./service-registry
     container_name: eureka-server
+    build:
+      context:  ./service-registry
+      dockerfile: Dockerfile
+    image: eureka-server:latest
     restart: always
     ports:
       - 8761:8761
     networks:
-      - maintainance
-    healthcheck:
-      test: curl --fail http://eureka-server/actuator/health || exit 1
-      interval: 60s
-      retries: 5
-      start_period: 60s
-      timeout: 10s
+      - spring-cloud-network
+    # healthcheck:
+    #   test: curl --fail http://eureka-server/actuator/health || exit 1
+    #   interval: 60s
+    #   retries: 5
+    #   start_period: 60s
+    #   timeout: 10s
 
   config-server:
-    build: ./config-server
     container_name: config-server
+    build: 
+      context: ./config-server
+      dockerfile: Dockerfile
+    image: config-server:latest
     restart: always
     ports:
       - 9192:9192
     depends_on:
-      eureka-server:
-        condition: "service_healthy"
+      - eureka-server
     networks:
-      - maintainance
+      - spring-cloud-network
     
-  # api-gateway:
-  #   build: ./api-gateway
-  #   container_name: api-gateway
-  #   restart: always
-  #   ports:
-  #     - 9191:9191
-  #   depends_on:
-  #     config-server:
-  #       condition: service_started
-  #     eureka-server:
-  #       condition: service_started
-  #   networks:
-  #     - maintainance
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    restart: always
+    ports:
+      - 9191:9191
+    depends_on:
+      - config-server
+      - eureka-server
+    networks:
+      - spring-cloud-network
     
   # user-service:
   #   build: ./user-service
@@ -57,5 +60,5 @@ services:
   #     - config-server
 
 networks:
-  maintainance:
+  spring-cloud-network:
     driver: bridge
