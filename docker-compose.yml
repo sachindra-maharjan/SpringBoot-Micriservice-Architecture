@@ -53,6 +53,8 @@ services:
     depends_on:
       - config-server
       - eureka-server
+    networks:
+      - spring-cloud-network
 
   comment-service:
     container_name: comment-service

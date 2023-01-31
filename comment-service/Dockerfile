@@ -12,7 +12,6 @@ COPY src ./src
 
 COPY ./wait-for-it.sh ./
 RUN chmod +x ./wait-for-it.sh
-RUN ls -al
 
 ENTRYPOINT [ "./wait-for-it.sh",  "config-server:9190/actuator/health"]
 
