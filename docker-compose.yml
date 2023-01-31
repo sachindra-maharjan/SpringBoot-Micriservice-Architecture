@@ -41,6 +41,12 @@ services:
       - eureka-server
     networks:
       - spring-cloud-network
+  
+  zipkin-server:
+    container_name: zipkin-server
+    image: openzipkin/zipkin
+    ports:
+      - 9411:9411
     
   user-service:
     container_name: user-service
@@ -53,6 +59,7 @@ services:
     depends_on:
       - config-server
       - eureka-server
+      - zipkin-server
     networks:
       - spring-cloud-network
 
@@ -67,6 +74,7 @@ services:
     depends_on:
       - config-server
       - api-gateway
+      - zipkin-server
     networks:
       - spring-cloud-network
 
