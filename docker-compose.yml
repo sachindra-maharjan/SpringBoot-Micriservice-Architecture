@@ -21,15 +21,18 @@ services:
     image: config-server:latest
     restart: always
     ports:
-      - 9192:9192
+      - 9190:9190
     depends_on:
       - eureka-server
     networks:
       - spring-cloud-network
     
   api-gateway:
-    build: ./api-gateway
     container_name: api-gateway
+    build: 
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    image: api-gateway:latest
     restart: always
     ports:
       - 9191:9191
@@ -39,19 +42,31 @@ services:
     networks:
       - spring-cloud-network
     
-  # user-service:
-  #   build: ./user-service
-  #   ports:
-  #     - 9010:9010
-  #   depends_on:
-  #     - config-server
+  user-service:
+    container_name: user-service
+    build: 
+      context: ./user-service
+      dockerfile: Dockerfile
+    image: user-service:latest
+    ports:
+      - 9291:9291
+    depends_on:
+      - config-server
+      - eureka-server
 
-  # comment-service:
-  #   build: ./comment-service
-  #   ports:
-  #     - 9020:9020
-  #   depends_on:
-  #     - config-server
+  comment-service:
+    container_name: comment-service
+    build:
+      context: ./comment-service
+      dockerfile: Dockerfile
+    image: comment-service:latest
+    ports:
+      - 9292:9292
+    depends_on:
+      - config-server
+      - api-gateway
+    networks:
+      - spring-cloud-network
 
 networks:
   spring-cloud-network:

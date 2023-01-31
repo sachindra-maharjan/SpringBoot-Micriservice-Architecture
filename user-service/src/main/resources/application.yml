@@ -1,11 +1,8 @@
 server:
-  port: 9010
+  port: 9291
 
 spring:
   application:
     name: USER-SERVICE
   config:
-    import: "optional:configserver:http://localhost:9192"
-
-
-
+    import: "optional:configserver:http://config-server:9190"

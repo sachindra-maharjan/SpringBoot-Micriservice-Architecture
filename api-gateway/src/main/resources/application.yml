@@ -5,7 +5,7 @@ spring:
   application:
     name: API-GATEWAY
   config:
-    import: "optional:configserver:http://config-server:9192"
+    import: "optional:configserver:http://config-server:9190"
   cloud:
     gateway:
       routes:
