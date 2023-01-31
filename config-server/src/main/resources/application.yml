@@ -4,15 +4,18 @@ server:
 spring:
   application:
     name: CONFIG-SERVER
-
   cloud:
     config:
       server: 
         git: 
           uri: https://github.com/sachindra-maharjan/config-server
           clone-on-start: true
-          repos:
-            gitpod:
-              pattern: gitpod*
-              uri: file://workspace/SpringBoot-Micriservice-Architecture/config-service-configuration/gitpod
-        
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
+  instance:
+    prefer-ip-address: true

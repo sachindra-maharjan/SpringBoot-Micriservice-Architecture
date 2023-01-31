@@ -1,0 +1,8 @@
+server:
+  port: 9020
+
+spring:
+  application:
+    name: COMMENT-SERVICE
+  config:
+    import: "optional:configserver:http://localhost:9192"
