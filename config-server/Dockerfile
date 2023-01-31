@@ -1,5 +1,7 @@
 FROM openjdk:19-jdk-alpine
 
+RUN apk --update --no-cache add curl
+
 WORKDIR /app
  
 COPY .mvn/ .mvn
